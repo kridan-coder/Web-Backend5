@@ -1,0 +1,52 @@
+@model IEnumerable<Backend5.Models.Diagnosis>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>ShowWholeList</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complications)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(x => x.Patient.Name))
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complications)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.Name)
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-diagnosisId="@item.Id" asp-route-patientId="@item.PatientId">Edit</a> |
+                <a asp-action="Details" asp-route-diagnosisId="@item.Id" asp-route-patientId="@item.PatientId">Details</a> |
+                <a asp-action="Delete" asp-route-diagnosisId="@item.Id" asp-route-patientId="@item.PatientId">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+@model IEnumerable<Backend5.Models.WardStaff>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>ShowWholeList</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ward)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(x => x.Ward.Name))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ward.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-wardStaffId="@item.Id" asp-route-wardId="@item.WardId">Edit</a> |
+                    <a asp-action="Details" asp-route-wardStaffId="@item.Id" asp-route-wardId="@item.WardId">Details</a> |
+                    <a asp-action="Delete" asp-route-wardStaffId="@item.Id" asp-route-wardId="@item.WardId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
